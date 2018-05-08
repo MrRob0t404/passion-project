@@ -30,7 +30,12 @@ class ToDoRouter extends Component {
     }
 
     renderTodoList = () => {
-        return <Home onSubmit={this.onSubmit} handleInput={this.handleInput} value={this.state.input}/>
+        const {input, toDoArray} = this.state
+        return <Home
+            onSubmit={this.onSubmit}
+            handleInput={this.handleInput}
+            value={input}
+            toDoArray={toDoArray}/>
     }
 
     render() {
