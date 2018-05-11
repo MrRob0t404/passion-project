@@ -8,6 +8,9 @@ class ToDoRouter extends Component {
     constructor() {
         super();
         this.state = {
+            mode: 'note',
+            note: '',
+            list: '',
             input: '',
             toDoArray: []
         }
@@ -18,8 +21,10 @@ class ToDoRouter extends Component {
         const {toDoArray, input} = this.state
         this.setState({
             toDoArray: [
-                ...toDoArray,
-                input
+                ...toDoArray, {
+                    task: input,
+                    complete: false
+                }
             ],
             input: ''
         })
@@ -29,17 +34,31 @@ class ToDoRouter extends Component {
         this.setState({input: e.target.value})
     }
 
+    toggleComplete = e => {
+        console.log('toggleComplete', e.target.value)
+    }
+
+    toggleMode = e => {
+        this.setState({mode: e.target.name})
+    }
+
+    handleTextField = e => {
+        console.log('text input', e.target.name)
+    }
+
     renderTodoList = () => {
-        const {input, toDoArray} = this.state
+        const {input, toDoArray, mode} = this.state
         return <Home
             onSubmit={this.onSubmit}
             handleInput={this.handleInput}
             value={input}
-            toDoArray={toDoArray}/>
+            toDoArray={toDoArray}
+            toggleComplete={this.toggleComplete}
+            toggleMode={this.toggleMode}
+            handleTextField={this.handleInput}
+            mode={mode}/>
     }
-
     render() {
-        console.log('state:', this.state)
         return (
             <div>
                 <div>
