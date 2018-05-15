@@ -16,47 +16,69 @@ class Home extends Component {
 
     render() {
         const {
-            onSubmit,
+            onSubmitToDoList,
+            submitList,
+            handleTitileInput,
+            onSubmitTitle,
             handleInput,
             value,
-            toDoArray,
+            toDoList,
             toggleComplete,
             toggleMode,
             handleTextField,
-            mode
+            mode,
+            task,
+            title,
+            handleKeyPress, 
+            toDoArray
         } = this.props
-        const {textField} = this.state
-        console.log('home field:', this.state.textField)
+
+        // const {textField} = this.state
+        console.log('toDoArray', toDoArray)
         return (
             <div>
                 <div>
-                    <form onSubmit={onSubmit}>
+                    {/* renders  title for list */}
                         <input
-                            placeholder="Take a Note"
+                            placeholder='Title'
                             type='text'
-                            onChange={handleInput}
-                            value={value}
+                            onChange={handleTitileInput}
+                            name='title'
+                            value={title}
                             onClick={this.handleClick}/>
-                    </form>
+
                     <button onClick={toggleMode} name='list' className='mode'>
                         List
                     </button>
                     <button onClick={toggleMode} name='note' className='mode'>
                         Note
                     </button>
-                    {textField && mode === 'note'
-                        ? <textarea rows="4" onChange={handleTextField} value={value} cols="50"></textarea>
-                        : textField && mode === 'list'
-                            ? <input type='text'/>
-                            : ''}
+
+                    {/* either renders input box for to do list or text input field for notes */}
+                    <form onSubmit={onSubmitToDoList}><input name='task' placeholder ='item' type='text' value={task} onKeyPress={handleKeyPress} onChange={handleInput}/></form>
                 </div>
                 <div>
                     <div>
+                        {/* iterates through toDoList and renders list on screen */}
                         <ul>
-                            {toDoArray.map(element => {
-                                return <li onClick={toggleComplete} toggleComplete={toggleComplete}>{element.task}</li>
+                            {toDoList.map(element => {
+                                return <li>{element}</li>
                             })}
                         </ul>
+                        <button onClick={submitList}>Done</button>
+                    </div>
+                    <div>
+                        {/* iterates through toDoList and renders each todo list in its own container  */}
+                        {toDoArray.map(element => { 
+                            return ( 
+                                <div className='toDoBlock'> 
+                                    <h3 id='title'>{element.title}</h3>
+                                    <ul className='toDoItem'>{element.toDoList.map(ele => { 
+                                            return <li onClick={toggleComplete}>{ele}</li>
+                                        })}
+                                    </ul>
+                           </div>)
+                        })}
                     </div>
                 </div>
             </div>

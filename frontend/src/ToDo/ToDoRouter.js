@@ -8,56 +8,105 @@ class ToDoRouter extends Component {
     constructor() {
         super();
         this.state = {
-            mode: 'note',
+            mode: 'list', //Default mode
             note: '',
             list: '',
-            input: '',
+            title:'',
+            task: '',
+            toDoList: [], 
             toDoArray: []
         }
     }
 
-    onSubmit = e => {
+    // Handles todo list submittion 
+    submitList = e => {
         e.preventDefault();
-        const {toDoArray, input} = this.state
+        const {toDoArray, toDoList, task, title} = this.state
         this.setState({
             toDoArray: [
                 ...toDoArray, {
-                    task: input,
+                    title: title,
+                    toDoList: toDoList,
                     complete: false
                 }
             ],
-            input: ''
-        })
+            title: '', 
+            task: '', 
+            toDoList: []
+        }) 
     }
 
-    handleInput = e => {
-        this.setState({input: e.target.value})
-    }
+    //Handles notes submission 
+    // onSubmitNotes = e => {
+    //     e.preventDefault();
+    // }
 
+    
     toggleComplete = e => {
-        console.log('toggleComplete', e.target.value)
+        console.log('toggleComplete', 'clicked')
     }
-
+    
+    //Sets mode to list or note 
     toggleMode = e => {
         this.setState({mode: e.target.name})
     }
-
+    
+    handleKeyPress = e => { 
+        if (e.key === 'Enter'){ 
+            this.setState({ 
+                task : ''
+            })
+        }
+    }
+    
+    //Handles user input for text input box
+    handleInput = e => {
+        const {task} = this.state
+        console.log(e.target.value)
+        this.setState({ 
+            task: e.target.value
+        })
+        
+    }
+    
+    //Handles input for title input box 
+    handleTitileInput = e => { 
+        this.setState({ 
+            title: e.target.value
+        })
+    }
+    
+    //Handles user input for text field 
     handleTextField = e => {
         console.log('text input', e.target.name)
     }
 
+    onSubmitToDoList = e => { 
+        e.preventDefault();
+        const {toDoList,task} = this.state
+        this.setState({ 
+            toDoList: [...toDoList, task],
+            task: '' 
+        }) 
+    }
+    
     renderTodoList = () => {
-        const {input, toDoArray, mode} = this.state
+        const {input, toDoList, mode, task, title, toDoArray} = this.state
         return <Home
-            onSubmit={this.onSubmit}
+            onSubmitToDoList={this.onSubmitToDoList}
+            submitList={this.submitList}
+            handleTitileInput={this.handleTitileInput}
             handleInput={this.handleInput}
-            value={input}
+            toDoList={toDoList}
             toDoArray={toDoArray}
             toggleComplete={this.toggleComplete}
             toggleMode={this.toggleMode}
             handleTextField={this.handleInput}
+            task={task}
+            title={title}
             mode={mode}/>
     }
+
     render() {
         return (
             <div>
