@@ -37,9 +37,10 @@ class ToDoRouter extends Component {
     }
 
     //Handles notes submission 
-    // onSubmitNotes = e => {
-    //     e.preventDefault();
-    // }
+    onSubmitNotes = e => {
+        e.preventDefault();
+        console.log('handle note submission')
+    }
 
     
     toggleComplete = e => {
@@ -97,6 +98,7 @@ class ToDoRouter extends Component {
             submitList={this.submitList}
             handleTitileInput={this.handleTitileInput}
             handleInput={this.handleInput}
+            onSubmitNotes={this.onSubmitNotes}
             toDoList={toDoList}
             toDoArray={toDoArray}
             toggleComplete={this.toggleComplete}

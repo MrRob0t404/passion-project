@@ -18,8 +18,8 @@ class Home extends Component {
         const {
             onSubmitToDoList,
             submitList,
+            onSubmitNotes,
             handleTitileInput,
-            onSubmitTitle,
             handleInput,
             value,
             toDoList,
@@ -33,7 +33,7 @@ class Home extends Component {
             toDoArray
         } = this.props
 
-        // const {textField} = this.state
+        const {textField} = this.state
         console.log('toDoArray', toDoArray)
         return (
             <div>
@@ -55,7 +55,8 @@ class Home extends Component {
                     </button>
 
                     {/* either renders input box for to do list or text input field for notes */}
-                    <form onSubmit={onSubmitToDoList}><input name='task' placeholder ='item' type='text' value={task} onKeyPress={handleKeyPress} onChange={handleInput}/></form>
+                    {mode === 'list' && textField ? <form onSubmit={onSubmitToDoList}><input name='task' placeholder ='item' type='text' value={task} onKeyPress={handleKeyPress} onChange={handleInput}/></form> : mode === 'note' && textField ? <form onSubmit={onSubmitNotes}><textarea rows="4" cols="50" placeholder='Make a note'></textarea></form> : '' }
+                    
                 </div>
                 <div>
                     <div>
@@ -71,7 +72,7 @@ class Home extends Component {
                         {/* iterates through toDoList and renders each todo list in its own container  */}
                         {toDoArray.map(element => { 
                             return ( 
-                                <div className='toDoBlock'> 
+                                <div className='toDoBlockContainer'> 
                                     <h3 id='title'>{element.title}</h3>
                                     <ul className='toDoItem'>{element.toDoList.map(ele => { 
                                             return <li onClick={toggleComplete}>{ele}</li>
