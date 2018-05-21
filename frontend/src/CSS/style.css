@@ -1,0 +1,78 @@
+html {
+    background-color: rgb(229, 229, 229);
+}
+
+#nav {
+    background-color: #F2B32A;
+    height: 5em;
+    margin: 0;
+}
+
+#inputTitle {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+#titleInputBox {
+    text-align: center;
+    font-size: 30px;
+    width: 50%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+#todoItem {
+    font-size: 20px;
+    text-align: center;
+    width: 50%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+.modeButton {
+    border: none;
+    background: transparent;
+}
+
+#noteTextArea {
+    resize: none;
+    font-size: 10px;
+    width: 50%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+#container{ 
+    margin: 10px;
+}
+
+.toDoBlockContainer {
+    margin: 10px;
+    border-radius: 2px;
+    /* border: 2px solid black; */
+    width: 25%;
+    display: inline-block;
+    background-color: white;
+}
+
+.toDoBlockContainer>h3 {
+    margin-left: 5px;
+}
+
+.noteBlock {
+    margin: 10px;
+    border: 2px solid black;
+    width: 25%;
+    display: inline-block;
+}
+
+#itemContainter {
+    margin: auto;
+    width: 75%;
+}
