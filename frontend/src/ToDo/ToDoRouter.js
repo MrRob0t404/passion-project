@@ -86,9 +86,13 @@ class ToDoRouter extends Component {
 
     handleInput = e => {
         const {task} = this.state
-        console.log(e.target.value)
+        // console.log(e.target.value)
         this.setState({task: e.target.value})
 
+    }
+
+    toggleComplete = e => {
+        console.log('clicked', e.target.value)
     }
 
     handleNoteChange = e => {
@@ -103,6 +107,10 @@ class ToDoRouter extends Component {
     //Handles user input for text field
     handleTextField = e => {
         console.log('text input', e.target.name)
+    }
+
+    removeBlock = () => { 
+        console.log('removed')
     }
 
     renderTodoList = () => {
@@ -132,6 +140,7 @@ class ToDoRouter extends Component {
             toggleComplete={this.toggleComplete}
             toggleMode={this.toggleMode}
             handleTextField={this.handleInput}
+            removeBlock={this.removeBlock}
             task={task}
             note={note}
             title={title}
