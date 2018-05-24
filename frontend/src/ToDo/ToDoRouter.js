@@ -34,6 +34,7 @@ class ToDoRouter extends Component {
             note,
             noteArray
         } = this.state
+
         // ternary to submit either todo list or note
         this.state.mode === 'list'
             ? this.setState({
@@ -64,7 +65,7 @@ class ToDoRouter extends Component {
     }
 
     // Change this name
-    onSubmitToDoList = e => {
+    onSubmitToDoListForPreview = e => {
         e.preventDefault();
         const {toDoList, task} = this.state
         this.setState({
@@ -76,6 +77,7 @@ class ToDoRouter extends Component {
         })
     }
 
+    //shows secondary input field (list | notes)
     handleClick = () => {
         this.setState({textField: true})
     }
@@ -85,6 +87,7 @@ class ToDoRouter extends Component {
         this.setState({mode: e.target.name, textField: true})
     }
 
+    //handles secondary input 
     handleInput = e => {
         const {task} = this.state
         // console.log(e.target.value)
@@ -92,10 +95,12 @@ class ToDoRouter extends Component {
 
     }
 
+    //Not sure what this does yet 
     toggleComplete = e => {
         console.log('clicked', e.target.value)
     }
 
+    //Handles note changing
     handleNoteChange = e => {
         this.setState({note: e.target.value})
     }
@@ -114,6 +119,7 @@ class ToDoRouter extends Component {
         console.log('removed')
     }
 
+    // Renders todo list
     renderTodoList = () => {
         const {
             input,
@@ -128,13 +134,12 @@ class ToDoRouter extends Component {
         } = this.state
 
         return <Home
-            onSubmitToDoList={this.onSubmitToDoList}
+            onSubmitToDoListForPreview={this.onSubmitToDoListForPreview}
             submitList={this.submitList}
             handleTitileInput={this.handleTitileInput}
             handleInput={this.handleInput}
             handleClick={this.handleClick}
             handleNoteChange={this.handleNoteChange}
-            onSubmitNotes={this.onSubmitNotes}
             toDoList={toDoList}
             toDoArray={toDoArray}
             noteArray={noteArray}
