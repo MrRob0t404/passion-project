@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Link, Switch, Route} from 'react-router-dom'
+import LoginUser from '../Login/login'
 
 //inport compnents
 import Home from './Home'
@@ -114,7 +115,6 @@ class ToDoRouter extends Component {
         console.log('text input', e.target.name)
     }
 
-    //Test
     removeBlock = () => {
         console.log('removed')
     }
@@ -154,17 +154,23 @@ class ToDoRouter extends Component {
             mode={mode}/>
     }
 
+    renderLogin = () => {
+        return <LoginUser/>
+    }
+
     render() {
         return (
             <div>
                 <div>
                     <nav id='nav'>
-                        <Link to='/'>Home</Link>
+                        <Link to='/'>Home</Link>{' '}
+                        <Link to='/login'>Login</Link>{' '}
                     </nav>
                 </div>
                 <div>
                     <Switch>
                         <Route exact path='/' component={this.renderTodoList}/>
+                        <Route path='/login' component={this.renderLogin}/>
                     </Switch>
                 </div>
             </div>
