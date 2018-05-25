@@ -6,8 +6,8 @@ class LoginUser extends Component {
     constructor() {
         super();
         this.state = {
-            username: '',
-            password: '',
+            username: 'simongaviria1',
+            password: 'password',
             message: ' '
         }
     }
@@ -27,6 +27,7 @@ class LoginUser extends Component {
             password: password
         })
             .then(res => {
+                console.log('res.data.user', res.data.user)
                 this
                     .props
                     .setUser(res.data.user);
@@ -34,7 +35,7 @@ class LoginUser extends Component {
             })
             .catch(err => {
                 console.log(`error in login button`, err)
-                this.setState({username: '', password: '', message: 'Username / Password is incorrect'})
+                this.setState({password: '', message: 'Username / Password is incorrect'})
             })
     }
 
@@ -43,15 +44,17 @@ class LoginUser extends Component {
         return (
             <div className="auth" id="login">
                 <div className="auth-container" id="login-container">
-                    <h2>TyroDev</h2>
+                    <h2>Cloud Note</h2>
                     <form>
                         <input
+                            className='loginInput'
                             name="username"
                             placeholder="username"
                             type="text"
                             onChange={this.handleInput}
                             value={username}/>
                         <input
+                            className='loginInput'
                             name="password"
                             placeholder="password"
                             type="password"
@@ -64,7 +67,7 @@ class LoginUser extends Component {
                             value="Login"/>
                     </form>
                     <p>{" "}
-                        Not a TyroDev member?
+                        Not a member?
                         <Link to='/register'>
                             Sign up
                         </Link>
