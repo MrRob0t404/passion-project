@@ -98,6 +98,10 @@ li:before {
     width: 75%;
 }
 
+.loginInput {
+    margin: 5px;
+}
+
 /* -------------Test---------------- */
 
 *,
@@ -195,6 +199,11 @@ input {
 input:checked {
     order: 2;
     counter-increment: done-items;
+}
+
+.auth-button {
+    margin: 0;
+    padding: 0;
 }
 
 label {

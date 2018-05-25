@@ -15,7 +15,7 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
 router.get("/getLoggedinUser", loginRequired, db.getUser);
 router.post("/new", db.createUser);
 router.get("/logout", loginRequired, db.logoutUser);
-router.get("/getUserID/:username", db.getUserID);
-router.get("/profile/:username", db.getUserProfile);
+// router.get("/getUserID/:username", db.getUserID);
+// router.get("/profile/:username", db.getUserProfile);
 
 module.exports = router;

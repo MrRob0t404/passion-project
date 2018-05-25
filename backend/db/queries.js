@@ -1,8 +1,8 @@
 const db = require("./index");
 const authHelpers = require("../auth/helpers");
 const passport = require("../auth/local");
-const nodemailer = require('nodemailer');
-const notifications = require('./Email/email')
+// const nodemailer = require('nodemailer'); const notifications =
+// require('./Email/email')
 
 function createUser(req, res, next) {
     const hash = authHelpers.createHash(req.body.password);
@@ -14,7 +14,7 @@ function createUser(req, res, next) {
             res
                 .status(200)
                 .json({data: data[0]})
-            welcomeNotification(data[0])
+            // welcomeNotification(data[0])
         })
         .catch(err => {
             console.log(err);
@@ -31,18 +31,23 @@ function logoutUser(req, res, next) {
         .send("log out success");
 };
 
-function getUser(req, res, next) {
+const getUser = (req, res, next) => {
+    console.log("REQQQ:", req)
     db
-        .one("SELECT * FROM users WHERE username=${username}", {username: req.user.username})
+        .one("SELECT * FROM users WHERE username=${username}", req.user)
         .then(data => {
             res
                 .status(200)
                 .json({user: data});
+        })
+        .catch(err => {
+            return next(err)
         })
 };
 
 module.exports = {
     createUser,
     logoutUser,
-    getUser
+    getUser,
+    // getUserID
 };
