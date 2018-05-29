@@ -1,10 +1,9 @@
 const db = require("./index");
 const authHelpers = require("../auth/helpers");
 const passport = require("../auth/local");
-// const nodemailer = require('nodemailer'); const notifications =
-// require('./Email/email')
 
-function createUser(req, res, next) {
+//Creates new user
+const createUser = (req, res, next) => {
     const hash = authHelpers.createHash(req.body.password);
     console.log("create user hash:", hash);
     db
@@ -14,7 +13,6 @@ function createUser(req, res, next) {
             res
                 .status(200)
                 .json({data: data[0]})
-            // welcomeNotification(data[0])
         })
         .catch(err => {
             console.log(err);
@@ -24,13 +22,15 @@ function createUser(req, res, next) {
         })
 }
 
-function logoutUser(req, res, next) {
+//Logs out user
+const logoutUser = (req, res, next) => {
     req.logout();
     res
         .status(200)
         .send("log out success");
 };
 
+//Grabs user information
 const getUser = (req, res, next) => {
     console.log("REQQQ:", req)
     db
@@ -45,9 +45,42 @@ const getUser = (req, res, next) => {
         })
 };
 
+//Grabs all of the notes in the database
+const getNotes = (req, res, next) => {
+    db
+        .any("SELECT title, note FROM notes WHERE user_id = ${id}", req.user)
+        .then(data => {
+            res
+                .status(200)
+                .json({user: data})
+        })
+        .catch(err => {
+            return next(err);
+        })
+}
+
+const postNote = (req, res, next) => {
+    console.log('REQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ', req.user)
+    db
+        .none("INSERT INTO notes (title, note, user_id) VALUES (${title}, ${note}, ${user_id})", {
+        title: req.body.title,
+        note: req.body.note,
+        user_id: req.user.id
+    })
+        .then((data) => {
+            res.status(200)
+            // .json({data: data[0]})
+        })
+        .catch(err => {
+            return next(err)
+        })
+}
+
 module.exports = {
     createUser,
     logoutUser,
     getUser,
+    getNotes,
+    postNote
     // getUserID
 };
