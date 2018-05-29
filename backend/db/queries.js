@@ -60,7 +60,7 @@ const getNotes = (req, res, next) => {
 }
 
 const postNote = (req, res, next) => {
-    console.log('REQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ', req.user)
+    console.log('REQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ', req.user)
     db
         .none("INSERT INTO notes (title, note, user_id) VALUES (${title}, ${note}, ${user_id})", {
         title: req.body.title,
