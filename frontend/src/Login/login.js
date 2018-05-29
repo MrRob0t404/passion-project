@@ -6,9 +6,9 @@ class LoginUser extends Component {
     constructor() {
         super();
         this.state = {
-            username: 'simongaviria1',
-            password: 'password',
-            message: ' '
+            username: '',
+            password: '',
+            message: ''
         }
     }
 
