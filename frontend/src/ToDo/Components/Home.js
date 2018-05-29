@@ -1,21 +1,24 @@
 import React, {Component} from 'react'
-
-import Style from '../CSS/style.css'
-import Checkbox from './Components/Checkbox'
+import axios from 'axios'
+import Style from '../.././CSS/style.css'
+import Checkbox from './Checkbox'
 
 class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
             listOfToDoObjectArray: [],
-            checked: false
+            checked: false,
+            hardcode: [
+                1, 2, 3, 4, 5
+            ],
+            notes: []
         }
     }
 
-    componentWillReceiveProps = props => { //Broke the app
-        console.log('component will recieve props')
-        this.setState({listOfToDoObjectArray: props.toDoArray})
-    }
+    // componentWillReceiveProps = props => { //Broke the app console.log('component
+    // will recieve props') this.setState({listOfToDoObjectArray: props.toDoArray})
+    // }
     componentWillMount = () => {
         this.selectedCheckboxes = new Set();
     }
@@ -25,7 +28,7 @@ class Home extends Component {
     }
 
     toggleCheckbox = label => {
-        console.log('toggleCheckbox', this.selectedCheckboxes)
+        // console.log('toggleCheckbox', this.selectedCheckboxes)
         if (this.selectedCheckboxes.has(label)) {
             this
                 .selectedCheckboxes
@@ -49,20 +52,21 @@ class Home extends Component {
         formSubmitEvent.preventDefault();
 
         for (const checkbox of this.selectedCheckboxes) {
-            console.log(checkbox, 'is selected.');
+            // console.log(checkbox, 'is selected.');
         }
     }
 
     createCheckBoxes = () => {
-        console.log('createCheckBoxes', this.state.listOfToDoObjectArray)
+        // console.log('createCheckBoxes', this.state.listOfToDoObjectArray)
+
         return this
             .state
-            .listOfToDoObjectArray
-            .toDoList
+            .hardcode
             .map(this.createCheckBox)
     }
 
     render() {
+
         const {
             onSubmitToDoListForPreview,
             submitList,
@@ -82,10 +86,11 @@ class Home extends Component {
             toDoArray,
             handleClick,
             removeBlock,
-            textField
+            textField,
+            user
         } = this.props
 
-        // console.log('noteArray', toDoArray)
+        // console.log('console log notes: ', noteArray)
         return (
             <div id='container'>
                 <div id='inputTitle'>
@@ -145,23 +150,25 @@ class Home extends Component {
                     <div id='itemContainter'>
                         {/* iterates through toDoList and renders each todo list in its own container  */}
 
-                        {toDoArray.map(element => {
-                            return (
-                                <div className='toDoBlockContainer container'>
-                                    <h1 id='title'>{element.title}</h1>
-                                    <h2 className="undone" aria-hidden="true">Not Done</h2>
-                                    {this.createCheckBoxes()}
+                        {toDoArray[0]
+                            ? toDoArray.map(element => {
+                                return (
+                                    <div className='toDoBlockContainer container'>
+                                        <h1 id='title'>{element.title}</h1>
+                                        <h2 className="undone" aria-hidden="true">Not Done</h2>
+                                        {this.createCheckBoxes()}
 
-                                    <h2 className="done" aria-hidden="true">Done</h2>
+                                        <h2 className="done" aria-hidden="true">Done</h2>
 
-                                    <button onClick={removeBlock}>delete</button>
-                                </div>
-                            )
-                        })}
+                                        <button onClick={removeBlock}>delete</button>
+                                    </div>
+                                )
+                            })
+                            : ''}
 
                         {/* iterates through noteArray and renders each todo list in its own container  */}
                         {noteArray.map(ele => {
-                            console.log('title', ele.title)
+
                             return (
                                 <div className='noteBlock'>
                                     <h3>{ele.title}</h3>

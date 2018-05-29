@@ -70,8 +70,6 @@ class App extends Component {
   }
 
   render() {
-    const {user, active} = this.state
-
     return (
       <div>
         <Switch>
