@@ -54,6 +54,13 @@ class ToDoRouter extends Component {
                 user_id: this.props.user.id
             })
         } else {
+            toDoArray.map(ele => {
+                axios.post('users/postToDoList', {
+                    item: ele,
+                    complete: false,
+                    todo_list_id: '?'
+                })
+            })
             axios.post('users/postToDoList', {
                 title: title,
                 toDoList: toDoList
@@ -139,8 +146,16 @@ class ToDoRouter extends Component {
         // console.log('text input', e.target.name)
     }
 
-    removeBlock = () => {
-        // console.log('removed')
+    removeBlock = e => {
+        const {toDoList, noteArray, toDoArray} = this.state
+        console.log('toDoList', toDoList, 'noteArray', noteArray, 'toDoArray', toDoArray)
+        this.setState({
+            noteArray: noteArray.filter(ele => {
+                if (ele.title !== e.target.value) {
+                    return ele;
+                }
+            })
+        })
     }
 
     // Renders todo list
@@ -188,8 +203,7 @@ render() {
         <div>
             <div>
                 <nav id='nav'>
-                    <button onClick={this.props.logOut}>Logout</button>{' '}
-                    {/* <h2>Hello, {this.state.user.username}</h2> */}
+                    <button onClick={this.props.logOut}>Logout</button>{' '} {/* <h2>Hello, {this.state.user.username}</h2> */}
                 </nav>
             </div>
             <div>
