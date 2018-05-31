@@ -35,7 +35,10 @@ class Home extends Component {
 
     renderTodoList = ele => {
         //ele = {title: "csdcsc", toDoList: Array(3), complete: false}
-        return <TodoList toDoObject={ele} removeBlock={this.props.removeBlock}/>
+        return <TodoList
+            key={ele.title}
+            toDoObject={ele}
+            removeBlock={this.props.removeBlock}/>
     }
 
     render() {
@@ -59,6 +62,7 @@ class Home extends Component {
             toDoArray,
             handleClick,
             textField,
+            removeBlock,
             user
         } = this.props
 
@@ -143,11 +147,11 @@ class Home extends Component {
 
                         {/* iterates through noteArray and renders each todo list in its own container  */}
                         {noteArray.map(ele => {
-
                             return (
-                                <div className='noteBlock'>
+                                <div className='noteBlock' key={ele.title}>
                                     <h3>{ele.title}</h3>
                                     <p>{ele.note}</p>
+                                    <button onClick={removeBlock} value={ele.title}>delete</button>
                                 </div>
                             )
                         })}
