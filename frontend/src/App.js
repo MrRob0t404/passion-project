@@ -58,7 +58,7 @@ class App extends Component {
   handleRegisterUser = () => {
     const {user} = this.state;
     if (user) {
-      return <Redirect to='/home'/>
+      return <Redirect to='/'/>
     } else {
       return (<RegisterUser setUser={this.UserFound}/>)
     }
@@ -66,7 +66,11 @@ class App extends Component {
 
   handleToDoRouter = () => {
     const {user, loading} = this.state
-    return (<ToDoRouter user={user} logOut={this.logOut} loading={loading}/>)
+    if(!user){
+      return <Redirect to='/login' />
+    } else {
+      return (<ToDoRouter user={user} logOut={this.logOut} loading={loading}/>)      
+    }
   }
 
   render() {
