@@ -22,6 +22,13 @@ CREATE TABLE notes (
     user_id INTEGER REFERENCES users(ID)
 );
 
+CREATE TABLE TODO (
+    ID SERIAL PRIMARY KEY,
+    title VARCHAR,
+    todo_list VARCHAR,
+    user_id INTEGER REFERENCES users(ID)
+);
+
 INSERT INTO users (fullName,username, password_digest, email)
   VALUES('Simon Gaviria', 'simongaviria1','$2a$10$noryJFgByFccCS/F6XILSeqM.3TqBhmRJ0QtAMPHtlzriqk6rsY8S', 'simongaviria1@gmail.com'),('sebas g', 'sebas','$2a$10$noryJFgByFccCS/F6XILSeqM.3TqBhmRJ0QtAMPHtlzriqk6rsY8S', 'simongaviria2@gmail.com');
 

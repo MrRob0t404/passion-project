@@ -59,6 +59,7 @@ const getNotes = (req, res, next) => {
         })
 }
 
+//Adds another note to the backend 
 const postNote = (req, res, next) => {
     console.log('REQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ', req.user)
     db
