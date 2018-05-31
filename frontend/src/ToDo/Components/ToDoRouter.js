@@ -184,7 +184,6 @@ class ToDoRouter extends Component {
 }
 
 render() {
-    console.log('notes', this.state.noteArray)
     return (
         <div>
             <div>
