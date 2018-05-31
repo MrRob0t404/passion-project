@@ -1,3 +1,4 @@
+/*
 html {
     background-color: rgb(229, 229, 229);
 }
@@ -13,7 +14,6 @@ html {
     text-align: center;
     margin: auto;
     width: 50%;
-    /* border: 3px solid black; */
     padding: 10px;
 }
 
@@ -103,7 +103,7 @@ li:before {
 }
 
 /* -------------Test---------------- */
-
+ /*
 *,
 *::before,
 *::after {
@@ -118,7 +118,6 @@ body {
     height: 100%;
     margin: 20px;
     color: #435757;
-    /* background: linear-gradient(-20deg, #d0b782 20%, #a0cecf 80%); */
     font: 500 1.2em/1.2 'Roboto', sans-serif;
 }
 
@@ -184,9 +183,9 @@ h2::after {
 .undone::after {
     content: ' (' counter(undone-items) ')';
 }
-
+*/
 /* hide inputs offscreen, but at the same vertical positions as the correpsonding labels, so that tabbing scrolls the viewport as expected */
-
+/*
 input {
     display: block;
     height: 53px;
@@ -218,7 +217,7 @@ label {
 
 label::before {
     content: '\f10c';
-    /* circle outline */
+    circle outline
     display: block;
     position: absolute;
     top: 11px;
@@ -238,7 +237,7 @@ input:checked+label {
 
 input:checked+label::before {
     content: '\f058';
-    /* circle checkmark */
+    circle checkmark
 }
 
 @keyframes done {
@@ -264,3 +263,4 @@ input:checked+label::before {
         background-color: rgba(255, 255, 255, .4);
     }
 }
+*/
