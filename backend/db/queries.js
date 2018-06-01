@@ -59,7 +59,7 @@ const getNotes = (req, res, next) => {
         })
 }
 
-//Adds another note to the backend 
+//Adds another note to the backend
 const postNote = (req, res, next) => {
     console.log('REQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ', req.user)
     db
@@ -77,11 +77,24 @@ const postNote = (req, res, next) => {
         })
 }
 
+const deleteNote = (req, res, next) => {
+    console.log('REQQQ: ', req.body.title)
+    db
+        .none("DELETE FROM notes WHERE title = ${title}", {title: req.body.title})
+        .then((data) => {
+            res.status(200)
+        })
+        .catch(err => {
+            return next(err)
+        })
+}
+
 module.exports = {
     createUser,
     logoutUser,
     getUser,
     getNotes,
-    postNote
+    postNote,
+    deleteNote
     // getUserID
 };

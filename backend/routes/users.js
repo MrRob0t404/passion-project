@@ -17,6 +17,8 @@ router.post("/new", db.createUser);
 router.get("/logout", loginRequired, db.logoutUser);
 router.get("/getNotes", db.getNotes)
 router.post("/postNote", db.postNote);
+router.post("/deleteNote", db.deleteNote);
+
 // router.get("/getUserID/:username", db.getUserID);
 // router.get("/profile/:username", db.getUserProfile);
 
