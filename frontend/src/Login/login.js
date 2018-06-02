@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
+import Main from '.././Login_v3/css/main.css'
+import Util from '.././Login_v3/css/util.css'
+
 class LoginUser extends Component {
     constructor() {
         super();
@@ -13,6 +16,8 @@ class LoginUser extends Component {
     }
 
     handleInput = e => {
+        console.log(e.target.name, ':', e.target.value)
+
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -42,37 +47,52 @@ class LoginUser extends Component {
     render() {
         const {message, username, password} = this.state
         return (
-            <div className="auth" id="login">
-                <div className="auth-container" id="login-container">
-                    <h2>Cloud Note</h2>
-                    <form>
-                        <input
-                            className='loginInput'
-                            name="username"
-                            placeholder="username"
-                            type="text"
-                            onChange={this.handleInput}
-                            value={username}/>
-                        <input
-                            className='loginInput'
-                            name="password"
-                            placeholder="password"
-                            type="password"
-                            onChange={this.handleInput}
-                            value={password}/>
-                        <input
-                            type="submit"
-                            className="auth-button"
-                            onClick={this.handleLoginButton}
-                            value="Login"/>
-                    </form>
-                    <p>{" "}
-                        Not a member?
-                        <Link to='/register'>
-                            Sign up
-                        </Link>
-                    </p>
-                    <p>{message}</p>
+            <div className="limiter">
+                <div className="container-login100">
+                    <div className="wrap-login100">
+                        <form className="login100-form validate-form">
+                            <span className="login100-form-logo">
+                                <i className="zmdi zmdi-landscape"></i>
+                            </span>
+
+                            <span className="login100-form-title p-b-34 p-t-27">
+                                Log in
+                            </span>
+
+                            <div className="wrap-input100 validate-input">
+                                <input
+                                    className="input100"
+                                    type="text"
+                                    name="username"
+                                    placeholder="Username"
+                                    onChange={this.handleInput}/>
+                                <span className="focus-input100" data-placeholder="&#xf207;"></span>
+                            </div>
+
+                            <div className="wrap-input100 validate-input">
+                                <input
+                                    className="input100"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    onChange={this.handleInput}/>
+                                <span className="focus-input100" data-placeholder="&#xf191;"></span>
+                            </div>
+
+                            <div className="container-login100-form-btn">
+                                <button className="login100-form-btn" onClick={this.handleLoginButton}>
+                                    Login
+                                </button>
+                            </div>
+
+                            <div className="text-center p-t-90">
+                                <Link to='/register'>
+                                    Not a Member?
+                                </Link>
+
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         )

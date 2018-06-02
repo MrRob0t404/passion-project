@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css?family=Hind+Madurai|Volkhov');
 html {
     background-color: rgb(229, 229, 229);
 }
@@ -56,7 +56,8 @@ html {
 }
 
 #container {
-    margin: 10px;
+    text-align: center;
+    margin: 20px;
 }
 
 ul {
@@ -86,24 +87,66 @@ li:before {
     margin-left: 5px;
 }
 
+.noteTitle {
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.noteBody {
+    font-family: 'Volkhov', serif;
+    font-size: 20px;
+    padding: 10px;
+}
+
+/* .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+} */
+
 .noteBlock {
+    align-self: flex-start;
     margin: 10px;
     background-color: white;
-    width: 25%;
+    width: 15%;
+    min-width: 200px;
+    height: 0%;
     display: inline-block;
+    box-shadow: 1px 2px grey;
+}
+
+.noteBlock:hover {
+    background-color: lightgray;
+}
+
+.deleteButton {
+    margin: 5px;
 }
 
 #itemContainter {
     margin: auto;
     width: 75%;
+    height: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .loginInput {
     margin: 5px;
 }
 
+.menu {
+    background-color: black;
+}
+
 /* -------------Test---------------- */
- /*
+
+/*
 *,
 *::before,
 *::after {
@@ -184,7 +227,9 @@ h2::after {
     content: ' (' counter(undone-items) ')';
 }
 */
+
 /* hide inputs offscreen, but at the same vertical positions as the correpsonding labels, so that tabbing scrolls the viewport as expected */
+
 /*
 input {
     display: block;

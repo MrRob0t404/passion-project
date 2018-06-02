@@ -29,12 +29,12 @@ CREATE TABLE TODO (
     user_id INTEGER REFERENCES users(ID)
 );
 
-  CREATE TABLE TODO_ITEM (
+CREATE TABLE TODO_ITEM (
     ID SERIAL PRIMARY KEY,
     item VARCHAR,
     complete BOOLEAN,
     todo_list_id INTEGER REFERENCES TODO(id)
-  ) 
+);
 
 INSERT INTO users (fullName,username, password_digest, email)
   VALUES('Simon Gaviria', 'simongaviria1','$2a$10$noryJFgByFccCS/F6XILSeqM.3TqBhmRJ0QtAMPHtlzriqk6rsY8S', 'simongaviria1@gmail.com'),('sebas g', 'sebas','$2a$10$noryJFgByFccCS/F6XILSeqM.3TqBhmRJ0QtAMPHtlzriqk6rsY8S', 'simongaviria2@gmail.com');
