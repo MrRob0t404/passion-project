@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Route, Switch, Link, Redirect} from 'react-router-dom';
+
 import axios from 'axios';
+
 import LoginUser from './Login/login';
 import RegisterUser from './Login/register';
 import ToDoRouter from './ToDo/Components/ToDoRouter';
@@ -15,7 +17,6 @@ class App extends Component {
   }
 
   // functions passed as Props
-
   UserFound = user => {
     this.setState({user: user});
   };
@@ -66,10 +67,10 @@ class App extends Component {
 
   handleToDoRouter = () => {
     const {user, loading} = this.state
-    if(!user){
-      return <Redirect to='/login' />
+    if (!user) {
+      return <Redirect to='/login'/>
     } else {
-      return (<ToDoRouter user={user} logOut={this.logOut} loading={loading}/>)      
+      return (<ToDoRouter user={user} logOut={this.logOut} loading={loading}/>)
     }
   }
 
