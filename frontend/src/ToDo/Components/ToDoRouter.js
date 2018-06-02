@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {Link, Switch, Route, Redirect} from 'react-router-dom'
 import axios from 'axios'
-// import LoginUser from '.././Login/login' inport compnents
+
 import Home from './Home'
+import {slide as Menu} from 'react-burger-menu'
 
 import Style from '../.././CSS/style.css'
 
@@ -30,6 +31,14 @@ class ToDoRouter extends Component {
             // console.log('axios data', res)
             this.setState({noteArray: res.data.user})
         })
+    }
+    // Submits title for backend. A temporary workaround for saving todolist items
+    // to backend
+    submitTitle = () => {
+        const {title} = this.state
+        axios
+            .post('/users/postTitleForTodoList', {title: title})
+            .then()
     }
 
     // Handles todo list submittion
@@ -148,14 +157,17 @@ class ToDoRouter extends Component {
 
     removeBlock = e => {
         const {toDoList, noteArray, toDoArray} = this.state
-        console.log('toDoList', toDoList, 'noteArray', noteArray, 'toDoArray', toDoArray)
-        this.setState({
-            noteArray: noteArray.filter(ele => {
-                if (ele.title !== e.target.value) {
-                    return ele;
-                }
-            })
-        })
+        // console.log('toDoList', toDoList, 'noteArray', noteArray, 'toDoArray',
+        // toDoArray)
+        axios
+            .post('/users/deleteNote', {title: e.target.value})
+            .then(this.setState({
+                noteArray: noteArray.filter(ele => {
+                    if (ele.title !== e.target.value) {
+                        return ele;
+                    }
+                })
+            }))
     }
 
     // Renders todo list

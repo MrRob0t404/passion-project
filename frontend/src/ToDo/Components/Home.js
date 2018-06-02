@@ -10,28 +10,9 @@ class Home extends Component {
         this.state = {
             listOfToDoObjectArray: [],
             checked: false,
-            hardcode: [
-                1, 2, 3, 4, 5
-            ],
             notes: []
         }
     }
-
-    // componentWillReceiveProps = props => { //Broke the app console.log('component
-    // will recieve props') this.setState({listOfToDoObjectArray: props.toDoArray})
-    // } componentWillMount = () => {     this.selectedCheckboxes = new Set(); }
-    // handleChecked = () => {     this.setState({checked: true}) } toggleCheckbox =
-    // label => {     // console.log('toggleCheckbox', this.selectedCheckboxes) if
-    // (this.selectedCheckboxes.has(label)) {         this .selectedCheckboxes
-    // .delete(label);     } else {         this         .selectedCheckboxes
-    // .add(label);     } } createCheckBox = label => {     return (<Checkbox
-    // label={label}   handleCheckboxChange ={this.toggleCheckbox} key={label}/>) }
-    // handleFormSubmit = formSubmitEvent => { //Dont need this
-    // formSubmitEvent.preventDefault(); for (const checkbox of
-    // this.selectedCheckboxes) {         // console.log(checkbox, 'is selected.');
-    // } } createCheckBoxes = () => { // console.log('createCheckBoxes',
-    // this.state.listOfToDoObjectArray) return this         .state .hardcode
-    // .map(this.createCheckBox) }
 
     renderTodoList = ele => {
         //ele = {title: "csdcsc", toDoList: Array(3), complete: false}
@@ -86,10 +67,12 @@ class Home extends Component {
                         name='list'
                         className='mode'>
                         List
-                    </button>
+                    </button>{' '}
                     <button onClick={toggleMode} name='note' className='mode'>
                         Note
-                    </button>
+                    </button>{' '} {mode === 'list'
+                        ? <button onClick={this.submitTitle}>submit title</button>
+                        : ''}
 
                     {/* either renders input box for to do list or text input field for notes */}
                     {mode === 'list' && textField
@@ -149,9 +132,9 @@ class Home extends Component {
                         {noteArray.map(ele => {
                             return (
                                 <div className='noteBlock' key={ele.title}>
-                                    <h3>{ele.title}</h3>
-                                    <p>{ele.note}</p>
-                                    <button onClick={removeBlock} value={ele.title}>delete</button>
+                                    <h3 className='noteTitle'>{ele.title}</h3>
+                                    <p className='noteBody'>{ele.note}</p>
+                                    <button className='deleteButton' onClick={removeBlock} value={ele.title}>delete</button>
                                 </div>
                             )
                         })}
