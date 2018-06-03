@@ -45,6 +45,7 @@ class ToDoRouter extends Component {
     submitList = e => {
         e.preventDefault();
         const {
+            user,
             toDoArray,
             toDoList,
             task,
@@ -63,16 +64,22 @@ class ToDoRouter extends Component {
                 user_id: this.props.user.id
             })
         } else {
-            toDoArray.map(ele => {
-                axios.post('users/postToDoList', {
-                    item: ele,
-                    complete: false,
-                    todo_list_id: '?'
-                })
-            })
-            axios.post('users/postToDoList', {
+            // console.log('list', true)
+            axios.post('/users/postListTitle', {
                 title: title,
-                toDoList: toDoList
+                user_id: user.id
+            })
+
+            // Each element in todoArray => {title: "title", toDoList: Array(5), complete:
+            // false}
+                .then(res => {
+                toDoList.map(ele => {
+                    axios.post('users/postListItems', {
+                        item: ele,
+                        complete: false,
+                        todo_list_id: res.data.data.id
+                    })
+                })
             })
         }
 
@@ -211,6 +218,7 @@ class ToDoRouter extends Component {
 }
 
 render() {
+    console.log('user', this.state.user)
     return (
         <div>
             <div>
