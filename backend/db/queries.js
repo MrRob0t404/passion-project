@@ -41,7 +41,7 @@ const getUser = (req, res, next) => {
                 .json({user: data});
         })
         .catch(err => {
-            return next(err)
+            return next(err);
         })
 };
 
@@ -52,7 +52,7 @@ const getNotes = (req, res, next) => {
         .then(data => {
             res
                 .status(200)
-                .json({user: data})
+                .json({user: data});
         })
         .catch(err => {
             return next(err);
@@ -89,12 +89,28 @@ const deleteNote = (req, res, next) => {
         })
 }
 
+//Creates new entry within the database 
+const postListTitle = (req, res, next) => {
+    db
+        .one("INSERT INTO todo (title) VALUES (${title})"+
+        "RETURNING id, title", {title: req.body.title})
+        .then((data) => {
+            console.log(data)
+            res
+                .status(200)
+                .json({data: data})
+        })
+        .catch(err => {
+            return next(err)
+        })
+}
+
 module.exports = {
     createUser,
     logoutUser,
     getUser,
     getNotes,
     postNote,
-    deleteNote
-    // getUserID
+    deleteNote,
+    postListTitle
 };
