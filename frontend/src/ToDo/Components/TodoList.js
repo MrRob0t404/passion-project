@@ -46,7 +46,7 @@ class TodoList extends Component {
 
     render() {
         const {removeBlock, toDoObject} = this.props
-        console.log('toDoList', toDoObject.toDoList)
+        // console.log('toDoList', toDoObject.toDoList)
         return (
             <div>
                 <div className='toDoBlockContainer container'>
