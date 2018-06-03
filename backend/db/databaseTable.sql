@@ -22,18 +22,17 @@ CREATE TABLE notes (
     user_id INTEGER REFERENCES users(ID)
 );
 
-CREATE TABLE TODO (
+CREATE TABLE todo (
     ID SERIAL PRIMARY KEY,
     title VARCHAR,
-    todo_list VARCHAR,
     user_id INTEGER REFERENCES users(ID)
 );
 
-CREATE TABLE TODO_ITEM (
+CREATE TABLE todo_item (
     ID SERIAL PRIMARY KEY,
     item VARCHAR,
     complete BOOLEAN,
-    todo_list_id INTEGER REFERENCES TODO(id)
+    todo_list_id INTEGER REFERENCES todo(id)
 );
 
 INSERT INTO users (fullName,username, password_digest, email)

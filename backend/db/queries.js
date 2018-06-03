@@ -89,16 +89,35 @@ const deleteNote = (req, res, next) => {
         })
 }
 
-//Creates new entry within the database 
+//Creates new entry within the database
 const postListTitle = (req, res, next) => {
     db
-        .one("INSERT INTO todo (title) VALUES (${title})"+
-        "RETURNING id, title", {title: req.body.title})
+        .one("INSERT INTO todo (title, user_id) VALUES (${title}, ${user_id})RETURNING id, tit" +
+            "le", {
+        title: req.body.title,
+        user_id: req.body.user_id
+    })
         .then((data) => {
             console.log(data)
             res
                 .status(200)
                 .json({data: data})
+        })
+        .catch(err => {
+            return next(err)
+        })
+}
+
+const postListItems = (req, res, next) => {
+    db
+        .none("INSERT INTO todo_item (item, complete, todo_list_id) VALUES (${item}, ${complete}, ${todo_list_id})", {
+        item: req.body.item,
+        complete: req.body.complete, 
+        todo_list_id: req.body.todo_list_id
+    })
+        .then((data) => {
+            res.status(200)
+            // .json({data: data[0]})
         })
         .catch(err => {
             return next(err)
@@ -112,5 +131,6 @@ module.exports = {
     getNotes,
     postNote,
     deleteNote,
-    postListTitle
+    postListTitle,
+    postListItems
 };
