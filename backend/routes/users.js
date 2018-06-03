@@ -19,6 +19,7 @@ router.get("/getNotes", db.getNotes)
 router.post("/postNote", db.postNote);
 router.post("/deleteNote", db.deleteNote);
 router.post("/postListTitle", db.postListTitle);
+router.post("/postListItems", db.postListItems);
 
 // router.get("/getUserID/:username", db.getUserID);
 // router.get("/profile/:username", db.getUserProfile);
