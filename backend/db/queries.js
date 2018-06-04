@@ -89,6 +89,19 @@ const deleteNote = (req, res, next) => {
         })
 }
 
+const getTodoList = (req, res, next) => {
+    db
+        .any("SELECT title, note FROM notes WHERE user_id = ${id}", req.user)
+        .then(data => {
+            res
+                .status(200)
+                .json({user: data});
+        })
+        .catch(err => {
+            return next(err);
+        })
+}
+
 //Creates new entry within the database
 const postListTitle = (req, res, next) => {
     db
@@ -110,9 +123,10 @@ const postListTitle = (req, res, next) => {
 
 const postListItems = (req, res, next) => {
     db
-        .none("INSERT INTO todo_item (item, complete, todo_list_id) VALUES (${item}, ${complete}, ${todo_list_id})", {
+        .none("INSERT INTO todo_item (item, complete, todo_list_id) VALUES (${item}, ${complete" +
+            "}, ${todo_list_id})", {
         item: req.body.item,
-        complete: req.body.complete, 
+        complete: req.body.complete,
         todo_list_id: req.body.todo_list_id
     })
         .then((data) => {
