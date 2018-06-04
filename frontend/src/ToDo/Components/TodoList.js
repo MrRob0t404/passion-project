@@ -49,13 +49,13 @@ class TodoList extends Component {
         // console.log('toDoList', toDoObject.toDoList)
         return (
             <div>
-                <div className='toDoBlockContainer container'>
+                <div id="todoBlock" className='listBlock toDoBlockContainer noteTitle container'>
                     <h1 id='title'>{toDoObject.title}</h1>
-                    <h2 className="undone" aria-hidden="true">Not Done</h2>
+                    <h2 className="undone noteBody" aria-hidden="true">Not Done</h2>
                     {
                             this.createCheckBoxes(toDoObject.toDoList)
                     }
-                    <h2 className="done" aria-hidden="true">Done</h2>
+                    <h2 className="done noteBody" aria-hidden="true">Done</h2>
                     <button onClick={removeBlock}>delete</button>
                 </div>
             </div>

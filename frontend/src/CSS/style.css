@@ -15,26 +15,58 @@ html {
     margin: auto;
     width: 50%;
     padding: 10px;
+    box-shadow: 1px 2px grey;
 }
 
 #titleInputBox {
-    text-align: center;
+    text-align: left;
     margin: auto;
-    font-size: 30px;
+    font-size: 20px;
+    color: black;
     width: 50%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #000000;
+    /* border-bottom: 1px solid #000000; */
 }
 
 #todoItem {
-    font-size: 20px;
-    text-align: center;
-    margin: auto;
+    font-size: 30px;
+    text-align: left;
+    /* margin: auto; */
+    margin-top: 10px;
     width: 70%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #000000;
+}
+
+.modeButton {
+    padding: 10px;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text)
+}
+
+[contentEditable=true] {
+    outline: 0px solid transparent;
+}
+
+.note {
+    padding: 10px;
+}
+
+#note {
+    display: block;
+    /* border: solid 1px #000; */
+    min-height: 200px;
+    width: 100%;
+}
+
+#todoItem::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: lightgray;
+    opacity: 1;
+    /* Firefox */
 }
 
 .modeButton {
@@ -99,13 +131,6 @@ li:before {
     padding: 10px;
 }
 
-/* .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-} */
-
 .noteBlock {
     align-self: flex-start;
     margin: 10px;
@@ -115,6 +140,7 @@ li:before {
     height: 0%;
     display: inline-block;
     box-shadow: 1px 2px grey;
+    text-align: left;
 }
 
 .noteBlock:hover {
@@ -142,6 +168,32 @@ li:before {
 
 .menu {
     background-color: black;
+}
+
+#closeButton {
+    float: right;
+}
+
+#todoBlock {
+    width: 15%;
+    min-width: 200px;
+    text-align: left;
+    padding: 10px;
+}
+
+.listBlock:hover {
+    background-color: lightgray;
+}
+
+.input::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: lightgrey;
+    opacity: 1;
+    /* Firefox */
+}
+
+#inputContainer {
+    text-align: left;
 }
 
 /* -------------Test---------------- */
