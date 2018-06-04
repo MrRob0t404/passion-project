@@ -31,8 +31,15 @@ class ToDoRouter extends Component {
             // console.log('axios data', res)
             this.setState({noteArray: res.data.user})
         })
-        //Add getList here
+
+        axios
+            .get('users/getListItems')
+            .then(res => {
+                // console.log('res', res.data.data)
+                this.setState({resData: res.data.data})
+            })
     }
+
     // Submits title for backend. A temporary workaround for saving todolist items
     // to backend
     submitTitle = () => {
@@ -191,6 +198,19 @@ class ToDoRouter extends Component {
             }))
     }
 
+    //formats list items to [{title: 'title', todoArray: [], complete: false}]
+    formatIncomingData = () => {
+        const {resData} = this.state
+        this.setState({
+            formatData: resData.filter(ele => {
+                console.log()
+                if (this.state.formatData.includes(ele.itle_of_todo_list) !== -1) {
+                    return ele.title
+                }
+            })
+        })
+    }
+
     // Renders todo list
     renderTodoList = () => {
         const {
@@ -233,7 +253,10 @@ class ToDoRouter extends Component {
 }
 
 render() {
-    console.log('user', this.state.user)
+    console.log('resData', this.state.resData)
+    console.log('toDoArray', this.state.toDoArray)
+    console.log('formatData', this.state.formatData)
+
     return (
         <div>
             <div>

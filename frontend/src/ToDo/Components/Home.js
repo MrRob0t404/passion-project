@@ -50,7 +50,7 @@ class Home extends Component {
             handleClose
         } = this.props
 
-        console.log('console log notes: ', mode)
+        // console.log('console log notes: ', mode)
         return (
             <div id='container'>
                 <div id='inputTitle'>
