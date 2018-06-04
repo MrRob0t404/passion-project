@@ -137,12 +137,27 @@ const postListItems = (req, res, next) => {
             return next(err)
         })
 }
-var sql = ``
+
 const getListItems = (req, res, next) => {
     db
-        .any(`SELECT user_id AS USERid_wHO_MADE_TODO, title AS TITLE_OF_TODO_LIST, item AS TODO_ITEM, todo.id AS TODO_LIST_ID_number, todo_item.todo_list_id,complete 
+        .any(`SELECT item AS todo_item, todo.id AS TODO_LIST_ID_number, todo_item.todo_list_id,complete 
         FROM todo 
         JOIN todo_item ON todo.id = todo_item.todo_list_id WHERE todo.id = todo_list_id  AND user_id = $/user_id/;`, {user_id: req.user.id})
+        .then((data) => {
+            res
+                .status(200)
+                .json({data: data})
+        })
+        .catch(err => {
+            return next(err)
+        })
+}
+
+const getListTitle = (req, res, next) => {
+    db
+        .any(`SELECT id, title 
+        FROM todo 
+        WHERE user_id = $/user_id/`, {user_id: req.user.id})
         .then((data) => {
             res
                 .status(200)
@@ -162,5 +177,6 @@ module.exports = {
     deleteNote,
     postListTitle,
     postListItems,
-    getListItems
+    getListItems,
+    getListTitle
 };
