@@ -4,6 +4,8 @@ import Style from '../.././CSS/style.css'
 import Checkbox from './Checkbox'
 import TodoList from './TodoList'
 
+import ContentEditable from 'react-simple-contenteditable';
+
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -44,56 +46,46 @@ class Home extends Component {
             handleClick,
             textField,
             removeBlock,
-            user
+            user,
+            handleClose
         } = this.props
 
-        // console.log('console log notes: ', noteArray)
+        console.log('console log notes: ', mode)
         return (
             <div id='container'>
                 <div id='inputTitle'>
-                    {/* renders  title for list */}
-                    <input
-                        id='titleInputBox'
-                        placeholder='Title'
-                        type='text'
-                        onChange={handleTitileInput}
-                        name={mode}
-                        value={title}
-                        onClick={handleClick}/>
+                    <div id='inputContainer'>
+                        {/* renders  title for list */}
+                        <input
+                            id='titleInputBox'
+                            className='input'
+                            placeholder='Title'
+                            type='text'
+                            onChange={handleTitileInput}
+                            name={mode}
+                            value={title}
+                            onClick={handleClick}/> {/* either renders input box for to do list or text input field for notes */}
+                        {mode === 'list' && textField
+                            ? <form onSubmit={onSubmitToDoListForPreview}><input
+                                    id='todoItem'
+                                    name='task'
+                                    placeholder='item'
+                                    type='text'
+                                    value={task}
+                                    onKeyPress={handleKeyPress}
+                                    onChange={handleInput}/></form>
+                            : mode === 'note' && textField
+                                ? <div id="note" contentEditable='true' data-text="Take a note..."></div>
 
-                    <button
-                        className='modeButton'
-                        onClick={toggleMode}
-                        name='list'
-                        className='mode'>
-                        List
-                    </button>{' '}
-                    <button onClick={toggleMode} name='note' className='mode'>
-                        Note
-                    </button>{' '} {mode === 'list'
-                        ? <button onClick={this.submitTitle}>submit title</button>
-                        : ''}
-
-                    {/* either renders input box for to do list or text input field for notes */}
-                    {mode === 'list' && textField
-                        ? <form onSubmit={onSubmitToDoListForPreview}><input
-                                id='todoItem'
-                                name='task'
-                                placeholder='item'
-                                type='text'
-                                value={task}
-                                onKeyPress={handleKeyPress}
-                                onChange={handleInput}/></form>
-                        : mode === 'note' && textField
-                            ? <textarea
-                                    id='noteTextArea'
-                                    onChange={handleNoteChange}
-                                    value={note}
-                                    rows="1"
-                                    cols="70"
-                                    placeholder='Make a note'></textarea>
-
-                            : ''}
+                                : ''}
+                    </div>
+                    {mode === 'list'
+                        ? <button className='modeButton' onClick={toggleMode} name='note'>
+                                note
+                            </button>
+                        : <button className='modeButton' onClick={toggleMode} name='list'>
+                            List
+                        </button>}
 
                     <div>
                         {/* iterates through toDoList and renders list on screen  before submission */}
@@ -103,6 +95,9 @@ class Home extends Component {
                             })}
                         </ul>
                         <button type='submit' onClick={submitList}>Done</button>
+                        {textField
+                            ? <button id="closeButton" onClick={handleClose}>Close</button>
+                            : ''}
                     </div>
                 </div>
                 <div>

@@ -31,6 +31,7 @@ class ToDoRouter extends Component {
             // console.log('axios data', res)
             this.setState({noteArray: res.data.user})
         })
+        //Add getList here
     }
     // Submits title for backend. A temporary workaround for saving todolist items
     // to backend
@@ -129,6 +130,11 @@ class ToDoRouter extends Component {
         this.setState({textField: true})
     }
 
+    //Closes the text input field
+    handleClose = () => {
+        this.setState({textField: false})
+    }
+
     //Sets mode to list or note
     toggleMode = e => {
         this.setState({mode: e.target.name, textField: true})
@@ -148,18 +154,26 @@ class ToDoRouter extends Component {
     }
 
     //Handles note changing
-    handleNoteChange = e => {
-        this.setState({note: e.target.value})
+    handleNoteChange = ev => {
+        // this.setState({note: e.target.value})
+        var html = this
+            .getDOMNode()
+            .innerHTML;
+        if (this.props.onChange && html !== this.lastHtml) {
+            this
+                .props
+                .onChange({
+                    target: {
+                        value: html
+                    }
+                });
+        }
+        this.lastHtml = html;
     }
 
     //Handles input for title input box
     handleTitileInput = e => {
         this.setState({title: e.target.value})
-    }
-
-    //Handles user input for text field
-    handleTextField = e => {
-        // console.log('text input', e.target.name)
     }
 
     removeBlock = e => {
@@ -211,7 +225,8 @@ class ToDoRouter extends Component {
                 title={title}
                 textField={textField}
                 mode={mode}
-                user={user}/>
+                user={user}
+                handleClose={this.handleClose}/>
         } else {
             return < Redirect to = '/login' />
     }
