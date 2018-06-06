@@ -92,7 +92,7 @@ class Home extends Component {
         } = this.props
 
         // console.log('listObj', this.props.listObj)
-        console.log('listOfToDoObjectArray', this.state.listOfToDoObjectArray)
+        console.log('todo array', toDoArray)
 
         return (
             <div id='container'>
@@ -152,22 +152,10 @@ class Home extends Component {
                             .map(ele => {
                                 return (this.renderTodoListFromCloud(ele))
                             })}
-                        
-                        {/* {toDoArray[0]
-                            ? toDoArray.map(element => {
-                                return (
-                                    <div className='toDoBlockContainer container'>
-                                        <h1 id='title'>{element.title}</h1>
-                                        <h2 className="undone" aria-hidden="true">Not Done</h2>
-                                        {this.createCheckBoxes()}
 
-                                        <h2 className="done" aria-hidden="true">Done</h2>
-
-                                        <button onClick={removeBlock}>delete</button>
-                                    </div>
-                                )
-                            })
-                            : ''} */}
+                        {toDoArray.map(ele => {
+                            return (this.renderTodoList(ele))
+                        })}
 
                         {/* iterates through noteArray and renders each todo list in its own container  */}
                         {noteArray.map(ele => {

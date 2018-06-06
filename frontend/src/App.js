@@ -38,7 +38,7 @@ class App extends Component {
     axios
       .get("/users/logout")
       .then(res => {
-        console.log(`this is the response`,res.data)
+        console.log(`this is the response`, res.data)
         this.setState({user: null});
       })
       .catch(err => {
@@ -67,20 +67,24 @@ class App extends Component {
 
   handleToDoRouter = () => {
     const {user, loading} = this.state
-    return (<ToDoRouter user={user} logOut={this.logOut} loading={loading}/>)
+    if (!user) {
+      return <Redirect to='/login'/>
+    } else {
+      return (<ToDoRouter user={user} logOut={this.logOut} loading={loading}/>)
+    }
   }
 
-  render() {
-    return (
-      <div>
-        <Switch>
-          <Route path="/login" render={this.handleLoginUser}/>
-          <Route path='/register' render={this.handleRegisterUser}/>
-          <Route path='/' render={this.handleToDoRouter}/>
-        </Switch>
-      </div>
-    )
+    render() {
+      return (
+        <div>
+          <Switch>
+            <Route path="/login" render={this.handleLoginUser}/>
+            <Route path='/register' render={this.handleRegisterUser}/>
+            <Route path='/' render={this.handleToDoRouter}/>
+          </Switch>
+        </div>
+      )
+    }
   }
-}
 
-export default App;
+  export default App;
