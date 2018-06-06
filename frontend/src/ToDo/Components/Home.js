@@ -12,8 +12,22 @@ class Home extends Component {
         this.state = {
             listOfToDoObjectArray: [],
             checked: false,
-            notes: []
+            notes: [],
+            arrayOfKeys: []
         }
+    }
+
+    componentDidMount = () => {
+        this.formatData()
+    }
+
+    formatData = () => {
+        const {listObj} = this.props
+        let newData = []
+        for (var property in listObj) {
+            newData.push(Object.keys(listObj[property]));
+        }
+        this.setState({arrayOfKeys: newData})
     }
 
     renderTodoList = ele => {
@@ -47,10 +61,13 @@ class Home extends Component {
             textField,
             removeBlock,
             user,
-            handleClose
+            handleClose,
+            listObj
         } = this.props
 
-        // console.log('console log notes: ', mode)
+        console.log('listObj', this.props.listObj)
+        console.log('listOfToDoObjectArray', this.state.listOfToDoObjectArray)
+        console.log('newArray', this.state.arrayOfKeys)
         return (
             <div id='container'>
                 <div id='inputTitle'>

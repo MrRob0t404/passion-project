@@ -20,24 +20,50 @@ class ToDoRouter extends Component {
             toDoList: [],
             noteArray: [],
             toDoArray: [],
-            user: null
+            user: null,
+            listObj: null
         }
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         const {noteArray} = this.state
-        this.setState({user: this.props.user})
+
         axios('/users/getNotes').then(res => {
             // console.log('axios data', res)
             this.setState({noteArray: res.data.user})
+        }).then(() => {
+            axios
+                .get('/users/getListTitle')
+                .then(res => {
+                    console.log('res1', res.data.data)
+                    this.setState({
+                        listObj: res
+                            .data
+                            .data
+                            .reduce((obj, item) => {
+                                obj[item.id] = item
+                                return obj
+                            }, {})
+                    })
+                })
+                .then(() => {
+                    axios
+                        .get('/users/getListItems')
+                        .then(res => {
+                            let listObjCopy = this.state.listObj
+                            res
+                                .data
+                                .data
+                                .forEach(ele => {
+                                    return listObjCopy[ele.todo_list_id][ele.todo_item] = ele.complete
+                                })
+                            this.setState({listObj: listObjCopy})
+                        })
+                })
+        }).then(() => {
+            this.setState({user: this.props.user})
         })
 
-        axios
-            .get('users/getListItems')
-            .then(res => {
-                // console.log('res', res.data.data)
-                this.setState({resData: res.data.data})
-            })
     }
 
     // Submits title for backend. A temporary workaround for saving todolist items
@@ -53,7 +79,6 @@ class ToDoRouter extends Component {
     submitList = e => {
         e.preventDefault();
         const {
-            user,
             toDoArray,
             toDoList,
             task,
@@ -75,7 +100,7 @@ class ToDoRouter extends Component {
             // console.log('list', true)
             axios.post('/users/postListTitle', {
                 title: title,
-                user_id: user.id
+                user_id: this.props.user.id
             })
 
             // Each element in todoArray => {title: "title", toDoList: Array(5), complete:
@@ -223,10 +248,18 @@ class ToDoRouter extends Component {
             noteArray,
             note,
             textField,
-            user
+            user,
+            listObj
         } = this.state
-        if (user) {
-            return <Home
+
+        console.log("this is what matters ", listObj)
+
+        if (!listObj) {
+            return (
+                <div>loading</div>
+            )
+        } else {
+            return (<Home
                 onSubmitToDoListForPreview={this.onSubmitToDoListForPreview}
                 submitList={this.submitList}
                 handleTitileInput={this.handleTitileInput}
@@ -246,33 +279,38 @@ class ToDoRouter extends Component {
                 textField={textField}
                 mode={mode}
                 user={user}
-                handleClose={this.handleClose}/>
-        } else {
-            return < Redirect to = '/login' />
+                listObj={listObj}
+                handleClose={this.handleClose}/>)
+        }
     }
-}
 
-render() {
-    console.log('resData', this.state.resData)
-    console.log('toDoArray', this.state.toDoArray)
-    console.log('formatData', this.state.formatData)
-
-    return (
-        <div>
-            <div>
-                <nav id='nav'>
-                    <button onClick={this.props.logOut}>Logout</button>{' '} {/* <h2>Hello, {this.state.user.username}</h2> */}
-                </nav>
-            </div>
-            <div>
-                <Switch>
-                    {/* <Route path='/login' component={this.renderLogin}/> */}
-                    <Route exact path='/' component={this.renderTodoList}/>
-                </Switch>
-            </div>
-        </div>
-    )
-}
+    render() {
+        if (this.state.noteArray) {
+            return (
+                <div>
+                    <div>
+                        <nav id='nav'>
+                            <i class="fas fa-sign-out-alt fa-4x" onClick={this.props.logOut}></i>
+                            <div id='logo'>
+                                {/* <i class="fal fa-cloud-upload fa-4x"></i> */}
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                CloudNotes</div>
+                        </nav>
+                    </div>
+                    <div>
+                        <Switch>
+                            {/* <Route path='/login' component={this.renderLogin}/> */}
+                            <Route exact path='/' component={this.renderTodoList}/>
+                        </Switch>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div>LOADING</div>
+            )
+        }
+    }
 }
 
 export default ToDoRouter

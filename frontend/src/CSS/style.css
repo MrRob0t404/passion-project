@@ -4,8 +4,11 @@ html {
 }
 
 #nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: #F2B32A;
-    height: 5em;
+    height: 6em;
     margin: 0;
 }
 
@@ -149,6 +152,22 @@ li:before {
 
 .deleteButton {
     margin: 5px;
+}
+
+#logo {
+    text-align: center;
+    font-size: 30px;
+    margin: 15px;
+}
+
+.fa-sign-out-alt{ 
+    justify-content: space-around;
+    margin: 13px;
+}
+
+#logout {
+    border: 2px solid black;
+    float: left;
 }
 
 #itemContainter {
