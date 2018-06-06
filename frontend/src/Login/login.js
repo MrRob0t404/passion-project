@@ -32,7 +32,7 @@ class LoginUser extends Component {
             password: password
         })
             .then(res => {
-                console.log('res.data.user', res.data.user)
+                // console.log('res.data.user', res.data.user)
                 this
                     .props
                     .setUser(res.data.user);

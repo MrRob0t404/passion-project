@@ -16,24 +16,6 @@ class App extends Component {
     }
   }
 
-  // functions passed as Props
-  UserFound = user => {
-    this.setState({user: user});
-  };
-
-  logOut = () => {
-    const {user} = this.state;
-    axios
-      .get("/users/logout")
-      .then(res => {
-        // console.log(`this is the response`,res.data)
-        this.setState({user: null});
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
   componentDidMount() {
     axios
       .get("/users/getLoggedinUser")
@@ -45,6 +27,24 @@ class App extends Component {
         this.setState({loading: false})
       });
   }
+
+  // functions passed as Props
+  UserFound = user => {
+    this.setState({user: user});
+  };
+
+  logOut = () => {
+    const {user} = this.state;
+    axios
+      .get("/users/logout")
+      .then(res => {
+        console.log(`this is the response`,res.data)
+        this.setState({user: null});
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   // Components
   handleLoginUser = () => {
@@ -67,20 +67,16 @@ class App extends Component {
 
   handleToDoRouter = () => {
     const {user, loading} = this.state
-    if (!user) {
-      return <Redirect to='/login'/>
-    } else {
-      return (<ToDoRouter user={user} logOut={this.logOut} loading={loading}/>)
-    }
+    return (<ToDoRouter user={user} logOut={this.logOut} loading={loading}/>)
   }
 
   render() {
     return (
       <div>
         <Switch>
-          <Route path="/login" component={this.handleLoginUser}/>
-          <Route path='/register' component={this.handleRegisterUser}/>
-          <Route path='/' component={this.handleToDoRouter}/>
+          <Route path="/login" render={this.handleLoginUser}/>
+          <Route path='/register' render={this.handleRegisterUser}/>
+          <Route path='/' render={this.handleToDoRouter}/>
         </Switch>
       </div>
     )
