@@ -3,6 +3,7 @@ import axios from 'axios'
 import Style from '../.././CSS/style.css'
 import Checkbox from './Checkbox'
 import TodoList from './TodoList'
+import TodoListFromCloud from './TodoListFromCloud'
 
 import ContentEditable from 'react-simple-contenteditable';
 
@@ -21,18 +22,43 @@ class Home extends Component {
         this.formatData()
     }
 
+    //finsh this
     formatData = () => {
         const {listObj} = this.props
-        let newData = []
-        for (var property in listObj) {
-            newData.push(Object.keys(listObj[property]));
+        var listOfTodoObj = [];
+        var todo = [];
+        var todoArray = [];
+
+        for (var i = 1; i <= Object.keys(listObj).length; i++) {
+            listOfTodoObj.push({title: listObj[i].title});
         }
-        this.setState({arrayOfKeys: newData})
+        // console.log('listObj', listObj)
+
+        for (var property in listObj) {
+            if (listObj[property]) {
+                todoArray.push(listObj[property]);
+            }
+        }
+        // console.log('todoArray', todoArray)
+        for (var i = 0; i < todoArray.length; i++) {
+            listOfTodoObj[i].todo = todoArray[i]
+        }
+        console.log('listOfTodoObj: ', listOfTodoObj);
+
+        this.setState({listOfToDoObjectArray: listOfTodoObj})
     }
 
     renderTodoList = ele => {
         //ele = {title: "csdcsc", toDoList: Array(3), complete: false}
         return <TodoList
+            key={ele.title}
+            toDoObject={ele}
+            removeBlock={this.props.removeBlock}/>
+    }
+
+    renderTodoListFromCloud = ele => {
+        //ele = {title: "csdcsc", toDoList: Array(3), complete: false}
+        return <TodoListFromCloud
             key={ele.title}
             toDoObject={ele}
             removeBlock={this.props.removeBlock}/>
@@ -65,9 +91,9 @@ class Home extends Component {
             listObj
         } = this.props
 
-        console.log('listObj', this.props.listObj)
+        // console.log('listObj', this.props.listObj)
         console.log('listOfToDoObjectArray', this.state.listOfToDoObjectArray)
-        console.log('newArray', this.state.arrayOfKeys)
+
         return (
             <div id='container'>
                 <div id='inputTitle'>
@@ -120,10 +146,13 @@ class Home extends Component {
                 <div>
                     <div id='itemContainter'>
                         {/* iterates through toDoList and renders each todo list in its own container  */}
-
-                        {toDoArray.map(ele => {
-                            return (this.renderTodoList(ele))
-                        })}
+                        {this
+                            .state
+                            .listOfToDoObjectArray
+                            .map(ele => {
+                                return (this.renderTodoListFromCloud(ele))
+                            })}
+                        
                         {/* {toDoArray[0]
                             ? toDoArray.map(element => {
                                 return (
