@@ -118,7 +118,11 @@ class Home extends Component {
                                     onKeyPress={handleKeyPress}
                                     onChange={handleInput}/></form>
                             : mode === 'note' && textField
-                                ? <div id="note" contentEditable='true' data-text="Take a note..."></div>
+                                ? <input
+                                        id='noteInput'
+                                        placeholder="take a note...."
+                                        name='note'
+                                        onChange={handleNoteChange}/>
 
                                 : ''}
                     </div>

@@ -186,21 +186,8 @@ class ToDoRouter extends Component {
     }
 
     //Handles note changing
-    handleNoteChange = ev => {
-        // this.setState({note: e.target.value})
-        var html = this
-            .getDOMNode()
-            .innerHTML;
-        if (this.props.onChange && html !== this.lastHtml) {
-            this
-                .props
-                .onChange({
-                    target: {
-                        value: html
-                    }
-                });
-        }
-        this.lastHtml = html;
+    handleNoteChange = e => {
+        this.setState({note: e.target.value})
     }
 
     //Handles input for title input box
@@ -224,17 +211,17 @@ class ToDoRouter extends Component {
     }
 
     //formats list items to [{title: 'title', todoArray: [], complete: false}]
-    formatIncomingData = () => {
-        const {resData} = this.state
-        this.setState({
-            formatData: resData.filter(ele => {
-                console.log()
-                if (this.state.formatData.includes(ele.itle_of_todo_list) !== -1) {
-                    return ele.title
-                }
-            })
-        })
-    }
+    // formatIncomingData = () => {
+    //     const {resData} = this.state
+    //     this.setState({
+    //         formatData: resData.filter(ele => {
+    //             console.log()
+    //             if (this.state.formatData.includes(ele.itle_of_todo_list) !== -1) {
+    //                 return ele.title
+    //             }
+    //         })
+    //     })
+    // }
 
     // Renders todo list
     renderTodoList = () => {
