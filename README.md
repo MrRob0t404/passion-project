@@ -1,4 +1,4 @@
-# Amex Coding Challenge
+# CloudNotes
 
 Check out the [deployed](https://intense-sea-86093.herokuapp.com/) web page on Heroku 
 # Get started 
