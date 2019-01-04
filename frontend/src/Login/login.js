@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Main from '.././Login_v3/css/main.css'
-import Util from '.././Login_v3/css/util.css'
+import Main from '.././CSS/LoginAssets/css/main.css'
+import Util from '.././CSS/LoginAssets/css/util.css'
 
 class LoginUser extends Component {
     constructor() {
@@ -25,27 +25,26 @@ class LoginUser extends Component {
 
     handleLoginButton = e => {
         e.preventDefault()
-        const {username, password} = this.state;
+        const { username, password } = this.state;
         axios
             .post('/users/login', {
-            username: username,
-            password: password
-        })
+                username: username,
+                password: password
+            })
             .then(res => {
-                // console.log('res.data.user', res.data.user)
                 this
                     .props
                     .setUser(res.data.user);
-                this.setState({username: '', password: '', message: 'Success!'})
+                this.setState({ username: '', password: '', message: 'Success!' })
             })
             .catch(err => {
                 console.log(`error in login button`, err)
-                this.setState({password: '', message: 'Username / Password is incorrect'})
+                this.setState({ password: '', message: 'Username / Password is incorrect' })
             })
     }
 
     render() {
-        const {message, username, password} = this.state
+        const { message, username, password } = this.state
         return (
             <div className="limiter">
                 <div className="container-login100">
@@ -65,7 +64,7 @@ class LoginUser extends Component {
                                     type="text"
                                     name="username"
                                     placeholder="Username"
-                                    onChange={this.handleInput}/>
+                                    onChange={this.handleInput} />
                                 <span className="focus-input100" data-placeholder="&#xf207;"></span>
                             </div>
 
@@ -75,7 +74,7 @@ class LoginUser extends Component {
                                     type="password"
                                     name="password"
                                     placeholder="Password"
-                                    onChange={this.handleInput}/>
+                                    onChange={this.handleInput} />
                                 <span className="focus-input100" data-placeholder="&#xf191;"></span>
                             </div>
 
@@ -86,6 +85,7 @@ class LoginUser extends Component {
                             </div>
 
                             <div className="text-center p-t-90">
+                                <h4>{message}</h4>
                                 <Link to='/register'>
                                     Not a Member?
                                 </Link>
