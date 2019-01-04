@@ -9,7 +9,7 @@ html {
     justify-content: space-between;
     background-color: #F2B32A;
     height: 6em;
-    margin: 10px;
+    margin: 0;
 }
 
 #inputTitle {
@@ -21,13 +21,19 @@ html {
     box-shadow: 1px 2px grey;
 }
 
+#todoInput {
+    width: 40%;
+    height: 30px;
+    padding: 20px;
+}
+
 #titleInputBox {
     text-align: left;
     margin: auto;
     font-size: 20px;
     color: black;
     width: 50%;
-    background: transparent;
+    /* background: transparent; */
     border: none;
     /* border-bottom: 1px solid #000000; */
 }
@@ -227,7 +233,7 @@ li:before {
     font-size: 25px;
 }
 
-#noteInput::placeholder{ 
+#noteInput::placeholder {
     color: lightgray;
 }
 
