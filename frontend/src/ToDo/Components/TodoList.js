@@ -54,11 +54,11 @@ class TodoList extends Component {
     }
 
     render() {
-        const { toDoObject } = this.props
+        const { toDoObject, display } = this.props
         return (
             <div>
                 <div
-                    id="todoBlock" className={this.state.display}
+                    id="todoBlock" className={display}
                     className='listBlock toDoBlockContainer noteTitle container'>
                     <h1 id='title'>{toDoObject.title}</h1>
                     <h2 className="undone noteBody" aria-hidden="true">Not Done</h2>
