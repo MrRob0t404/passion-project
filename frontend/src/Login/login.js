@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Main from '.././CSS/LoginAssets/css/main.css'
-import Util from '.././CSS/LoginAssets/css/util.css'
+import '.././CSS/LoginAssets/css/main.css'
+import '.././CSS/LoginAssets/css/util.css'
 
 class LoginUser extends Component {
     constructor() {
@@ -16,8 +16,6 @@ class LoginUser extends Component {
     }
 
     handleInput = e => {
-        console.log(e.target.name, ':', e.target.value)
-
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -38,13 +36,12 @@ class LoginUser extends Component {
                 this.setState({ username: '', password: '', message: 'Success!' })
             })
             .catch(err => {
-                console.log(`error in login button`, err)
                 this.setState({ password: '', message: 'Username / Password is incorrect' })
             })
     }
 
     render() {
-        const { message, username, password } = this.state
+        const { message } = this.state
         return (
             <div className="limiter">
                 <div className="container-login100">

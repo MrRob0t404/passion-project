@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Route, Switch, Link, Redirect} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -20,26 +20,25 @@ class App extends Component {
     axios
       .get("/users/getLoggedinUser")
       .then(res => {
-        this.setState({user: res.data.user, loading: false});
+        this.setState({ user: res.data.user, loading: false });
       })
       .catch(err => {
         console.log(`errrr`, err);
-        this.setState({loading: false})
+        this.setState({ loading: false })
       });
   }
 
   // functions passed as Props
   UserFound = user => {
-    this.setState({user: user});
+    this.setState({ user: user });
   };
 
   logOut = () => {
-    const {user} = this.state;
     axios
       .get("/users/logout")
       .then(res => {
         console.log(`this is the response`, res.data)
-        this.setState({user: null});
+        this.setState({ user: null });
       })
       .catch(err => {
         console.log(err);
@@ -48,43 +47,43 @@ class App extends Component {
 
   // Components
   handleLoginUser = () => {
-    const {user} = this.state
+    const { user } = this.state
     if (user) {
-      return <Redirect to='/'/>
+      return <Redirect to='/' />
     } else {
-      return <LoginUser setUser={this.UserFound}/>
+      return <LoginUser setUser={this.UserFound} />
     }
   }
 
   handleRegisterUser = () => {
-    const {user} = this.state;
+    const { user } = this.state;
     if (user) {
-      return <Redirect to='/'/>
+      return <Redirect to='/' />
     } else {
-      return (<RegisterUser setUser={this.UserFound}/>)
+      return (<RegisterUser setUser={this.UserFound} />)
     }
   }
 
   handleToDoRouter = () => {
-    const {user, loading} = this.state
+    const { user, loading } = this.state
     if (!user) {
-      return <Redirect to='/login'/>
+      return <Redirect to='/login' />
     } else {
-      return (<ToDoRouter user={user} logOut={this.logOut} loading={loading}/>)
+      return (<ToDoRouter user={user} logOut={this.logOut} loading={loading} />)
     }
   }
 
-    render() {
-      return (
-        <div>
-          <Switch>
-            <Route path="/login" render={this.handleLoginUser}/>
-            <Route path='/register' render={this.handleRegisterUser}/>
-            <Route path='/' render={this.handleToDoRouter}/>
-          </Switch>
-        </div>
-      )
-    }
+  render() {
+    return (
+      <div>
+        <Switch>
+          <Route path="/login" render={this.handleLoginUser} />
+          <Route path='/register' render={this.handleRegisterUser} />
+          <Route path='/' render={this.handleToDoRouter} />
+        </Switch>
+      </div>
+    )
   }
+}
 
-  export default App;
+export default App;
