@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import Style from '../.././CSS/style.css'
-import Checkbox from './Checkbox'
+import '../.././CSS/style.css'
 import TodoList from './TodoList'
 import TodoListFromCloud from './TodoListFromCloud'
 

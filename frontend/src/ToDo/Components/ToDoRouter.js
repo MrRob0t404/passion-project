@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import {Link, Switch, Route, Redirect} from 'react-router-dom'
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 
 import Home from './Home'
-import {slide as Menu} from 'react-burger-menu'
+import { slide as Menu } from 'react-burger-menu'
 
 import Style from '../.././CSS/style.css'
 
@@ -26,11 +26,11 @@ class ToDoRouter extends Component {
     }
 
     componentDidMount = () => {
-        const {noteArray} = this.state
+        const { noteArray } = this.state
 
         axios('/users/getNotes').then(res => {
             // console.log('axios data', res)
-            this.setState({noteArray: res.data.user})
+            this.setState({ noteArray: res.data.user })
         }).then(() => {
             axios
                 .get('/users/getListTitle')
@@ -57,11 +57,11 @@ class ToDoRouter extends Component {
                                 .forEach(ele => {
                                     return listObjCopy[ele.todo_list_id][ele.todo_item] = ele.complete
                                 })
-                            this.setState({listObj: listObjCopy})
+                            this.setState({ listObj: listObjCopy })
                         })
                 })
         }).then(() => {
-            this.setState({user: this.props.user})
+            this.setState({ user: this.props.user })
         })
 
     }
@@ -69,9 +69,9 @@ class ToDoRouter extends Component {
     // Submits title for backend. A temporary workaround for saving todolist items
     // to backend
     submitTitle = () => {
-        const {title} = this.state
+        const { title } = this.state
         axios
-            .post('/users/postTitleForTodoList', {title: title})
+            .post('/users/postTitleForTodoList', { title: title })
             .then()
     }
 
@@ -103,17 +103,17 @@ class ToDoRouter extends Component {
                 user_id: this.props.user.id
             })
 
-            // Each element in todoArray => {title: "title", toDoList: Array(5), complete:
-            // false}
+                // Each element in todoArray => {title: "title", toDoList: Array(5), complete:
+                // false}
                 .then(res => {
-                toDoList.map(ele => {
-                    axios.post('users/postListItems', {
-                        item: ele,
-                        complete: false,
-                        todo_list_id: res.data.data.id
+                    toDoList.map(ele => {
+                        axios.post('users/postListItems', {
+                            item: ele,
+                            complete: false,
+                            todo_list_id: res.data.data.id
+                        })
                     })
                 })
-            })
         }
 
         // ternary to submit either todo list or note
@@ -147,7 +147,7 @@ class ToDoRouter extends Component {
     // Change this name: Adds new todo item in the todo array
     onSubmitToDoListForPreview = e => {
         e.preventDefault();
-        const {toDoList, task} = this.state
+        const { toDoList, task } = this.state
         this.setState({
             toDoList: [
                 ...toDoList,
@@ -159,24 +159,24 @@ class ToDoRouter extends Component {
 
     //shows secondary input field (list | notes)
     handleClick = () => {
-        this.setState({textField: true})
+        this.setState({ textField: true })
     }
 
     //Closes the text input field
     handleClose = () => {
-        this.setState({textField: false})
+        this.setState({ textField: false })
     }
 
     //Sets mode to list or note
     toggleMode = e => {
-        this.setState({mode: e.target.name, textField: true})
+        this.setState({ mode: e.target.name, textField: true })
     }
 
     //handles secondary input
     handleInput = e => {
-        const {task} = this.state
+        const { task } = this.state
         // console.log(e.target.value)
-        this.setState({task: e.target.value})
+        this.setState({ task: e.target.value })
 
     }
 
@@ -187,20 +187,20 @@ class ToDoRouter extends Component {
 
     //Handles note changing
     handleNoteChange = e => {
-        this.setState({note: e.target.value})
+        this.setState({ note: e.target.value })
     }
 
     //Handles input for title input box
     handleTitileInput = e => {
-        this.setState({title: e.target.value})
+        this.setState({ title: e.target.value })
     }
 
     removeBlock = e => {
-        const {toDoList, noteArray, toDoArray} = this.state
+        const { toDoList, noteArray, toDoArray } = this.state
         // console.log('toDoList', toDoList, 'noteArray', noteArray, 'toDoArray',
         // toDoArray)
         axios
-            .post('/users/deleteNote', {title: e.target.value})
+            .post('/users/deleteNote', { title: e.target.value })
             .then(this.setState({
                 noteArray: noteArray.filter(ele => {
                     if (ele.title !== e.target.value) {
@@ -267,7 +267,7 @@ class ToDoRouter extends Component {
                 mode={mode}
                 user={user}
                 listObj={listObj}
-                handleClose={this.handleClose}/>)
+                handleClose={this.handleClose} />)
         }
     }
 
@@ -287,7 +287,7 @@ class ToDoRouter extends Component {
                     <div>
                         <Switch>
                             {/* <Route path='/login' component={this.renderLogin}/> */}
-                            <Route exact path='/' component={this.renderTodoList}/>
+                            <Route exact path='/' component={this.renderTodoList} />
                         </Switch>
                     </div>
                 </div>

@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import Checkbox from './Checkbox.js'
 
 class TodoList extends Component {
-    constructor(){
-        super(); 
-        this.state ={ 
+    constructor() {
+        super();
+        this.state = {
             display: ''
         }
     }
@@ -15,12 +15,12 @@ class TodoList extends Component {
     }
 
     createCheckBox = label => {
-        return (<Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label}/>)
+        return (<Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} />)
     }
 
-    removeList = () => { 
+    removeList = () => {
         console.log('clicked')
-        this.setState({ 
+        this.setState({
             display: 'none'
         })
     }
@@ -33,7 +33,7 @@ class TodoList extends Component {
     }
 
     handleChecked = () => {
-        this.setState({checked: true})
+        this.setState({ checked: true })
     }
 
     createCheckBoxes = (toDoList) => {
@@ -54,7 +54,7 @@ class TodoList extends Component {
     }
 
     render() {
-        const {removeBlock, toDoObject} = this.props
+        const { toDoObject } = this.props
         console.log('toDoList', toDoObject)
         return (
             <div>
@@ -64,11 +64,11 @@ class TodoList extends Component {
                     <h1 id='title'>{toDoObject.title}</h1>
                     <h2 className="undone noteBody" aria-hidden="true">Not Done</h2>
                     {this.createCheckBoxes(toDoObject.toDoList)
-}
+                    }
                     <h2 className="done noteBody" aria-hidden="true">Done</h2>
                     <button onClick={this.removeList}>delete</button>
                 </div>
-            </div> 
+            </div>
         )
     }
 }

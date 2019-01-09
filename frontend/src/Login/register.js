@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {Route, Link, Switch, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import Style from '.././CSS/style.css'
 
