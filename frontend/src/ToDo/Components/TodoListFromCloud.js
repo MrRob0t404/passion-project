@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import Checkbox from './Checkbox.js'
 
 class TodoListFromCloud extends Component {
-    constructor(){ 
-        super() 
-        this.state = { 
+    constructor() {
+        super()
+        this.state = {
             class: ''
         }
     }
@@ -14,8 +14,8 @@ class TodoListFromCloud extends Component {
         this.selectedCheckboxes = new Set();
     }
 
-    removeList = () => { 
-        this.setState({ 
+    removeList = () => {
+        this.setState({
             class: 'none'
         })
     }
@@ -23,9 +23,9 @@ class TodoListFromCloud extends Component {
     createCheckBox = label => {
         return (<Checkbox
             label={label}
-            handleCheckboxChange={this.toggleCheckbox} 
-            key={label}/>)
-}
+            handleCheckboxChange={this.toggleCheckbox}
+            key={label} />)
+    }
 
     // handleFormSubmit = formSubmitEvent => { //Dont need this
     //     formSubmitEvent.preventDefault();
@@ -36,14 +36,14 @@ class TodoListFromCloud extends Component {
     // }
 
     handleChecked = () => {
-        this.setState({checked: true})
+        this.setState({ checked: true })
     }
 
     createCheckBoxes = (toDoList) => {
 
         var todo = []
-        for(var property in toDoList){
-            if(property !== 'id' && property !== 'title')
+        for (var property in toDoList) {
+            if (property !== 'id' && property !== 'title')
                 todo.push(property)
         }
         console.log('todo', todo)
@@ -64,7 +64,7 @@ class TodoListFromCloud extends Component {
     }
 
     render() {
-        const {removeBlock, toDoObject} = this.props
+        const { toDoObject } = this.props
         console.log('toDoList', toDoObject)
         return (
             <div className={this.state.class}>
@@ -72,7 +72,7 @@ class TodoListFromCloud extends Component {
                     <h1 id='title'>{toDoObject.title}</h1>
                     <h2 className="undone noteBody" aria-hidden="true">Not Done</h2>
                     {
-                            this.createCheckBoxes(toDoObject.todo)
+                        this.createCheckBoxes(toDoObject.todo)
                     }
                     <h2 className="done noteBody" aria-hidden="true">Done</h2>
                     <button onClick={this.removeList}>delete</button>
