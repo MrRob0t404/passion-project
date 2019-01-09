@@ -55,7 +55,6 @@ class TodoList extends Component {
 
     render() {
         const { toDoObject } = this.props
-        console.log('toDoList', toDoObject)
         return (
             <div>
                 <div
