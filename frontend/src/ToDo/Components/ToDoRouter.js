@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 
 import Home from './Home'
-import { slide as Menu } from 'react-burger-menu'
+// import { slide as Menu } from 'react-burger-menu'
 
-import Style from '../.././CSS/style.css'
+import '../.././CSS/style.css'
 
 class ToDoRouter extends Component {
     constructor() {
