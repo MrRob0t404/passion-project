@@ -286,7 +286,6 @@ class ToDoRouter extends Component {
                     </div>
                     <div>
                         <Switch>
-                            {/* <Route path='/login' component={this.renderLogin}/> */}
                             <Route exact path='/' component={this.renderTodoList} />
                         </Switch>
                     </div>
